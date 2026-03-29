@@ -1,5 +1,9 @@
 # impress.js Format for Quarto
 
+**Forked from** [tilltnet/impressjs](https://github.com/tilltnet/impressjs) – original work by Till Krenz.
+
+---
+
 ![](quarto_impressjs.gif)
 
 This repository packages [impress.js](https://github.com/impress/impress.js)
@@ -12,6 +16,8 @@ quarto use template tilltnet/quarto_impressjs
 ```
 
 This will install the extension and create an example `qmd` file that you can use as a starting place for your presentation.
+
+Or you can download the [_extensions](./_extensions) folder in your project.
 
 ## Using
 
