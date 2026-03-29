@@ -4,8 +4,6 @@
 
 ---
 
-![](quarto_impressjs.gif)
-
 This repository packages [impress.js](https://github.com/impress/impress.js)
 as an extension for Quarto. See here for a general [demo of impress.js](https://impress.js.org/).
 
