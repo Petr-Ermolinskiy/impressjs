@@ -5,7 +5,8 @@ date: last-modified
 author: Till Krenz
 abstract: The other day over on [stackoverflow](https://stackoverflow.com/q/77146042/4821142) [user113156](https://stackoverflow.com/users/6447399/) asked if there is a way to create [Impress.js](https://github.com/impress/impress.js) presentations with Quarto. I created a [minimal example](https://stackoverflow.com/a/77146457/4821142) of a `qmd` file that renders into a impress.js presentation. To make the process more easy, I created a Quarto extension. So now you can get started with your prezi-style presentations with Quarto by simply installing the impress.js extension.  
 format: 
-  impressjs-html
+  impressjs-html:
+    css: css/modern-dark-glass.css
 execute: 
   echo: false
 ---
