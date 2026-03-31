@@ -7,8 +7,11 @@ abstract: The other day over on [stackoverflow](https://stackoverflow.com/q/7714
 format: 
   impressjs-html:
     css: css/modern-dark-glass.css
+    slide-level: 1
 execute: 
   echo: false
+  message: false
+  warning: false
 ---
 
 ::: {#overview-start .step data-scale=3}
@@ -45,22 +48,51 @@ That rotate.
 
 ::: {#slide1a .step .slide data-x="0" data-y="-1000"  data-rotate-z="0"}
 
-You can have r output on slides.
+You can have r output on slides (even Plotly).
 
 ```{r}
-#| fig.height: 6
-#| message: false
-library(tidyverse)
-library(ggplot2)
+#| output: asis
 
-mtcars |> 
-  as_tibble(rownames = "car") |> 
-  ggplot() +
-  geom_col(aes(reorder(car, disp), disp, fill = disp)) +
-  scale_fill_continuous(type = "viridis") +
-  coord_flip() +
-  theme_minimal() +
-  labs(y = "displacement")
+library(plotly)
+library(htmlwidgets)
+library(dplyr)
+
+# Prepare data
+plot_data <- mtcars %>%
+  as_tibble(rownames = "car")
+
+# Create your plotly figure
+p <- plot_ly(
+  data = plot_data,  # Explicitly specify the data parameter
+  x = ~disp,
+  y = ~reorder(car, disp),
+  type = "bar",
+  orientation = 'h',
+  marker = list(color = ~disp, colorscale = 'Viridis')
+) %>%
+  layout(
+    title = "Displacement by Car",
+    xaxis = list(title = "Displacement"),
+    yaxis = list(title = ""),
+    margin = list(l = 100, r = 20, t = 60, b = 40),
+    autosize = TRUE,
+    plot_bgcolor = '#1a1a2e',
+    paper_bgcolor = '#16213e',
+    font = list(color = 'white')
+  )
+
+# Create directory if it doesn't exist
+if(!dir.exists("figs")) dir.create("figs")
+
+# Save as standalone HTML
+saveWidget(p, "figs/plotly_figure.html", selfcontained = TRUE, libdir = NULL)
+
+# Embed via iframe
+cat('
+<iframe src="figs/plotly_figure.html"
+width="100%"
+height="550px"
+style="border:none; background: transparent; border-radius: 20px; overflow: hidden;"></iframe>')
 ```
 
 :::
@@ -70,6 +102,8 @@ mtcars |>
 And slides with more R output - **behind** your slides.
 
 ```{r}
+#| fig.width: 10
+#| fig.height: 6
 mtcars |> 
   as_tibble(rownames = "car") |> 
   mutate(angle = (qsec - min(qsec)) / (max(qsec) - min(qsec)) * 180 - 90) |> 
@@ -77,9 +111,35 @@ mtcars |>
   geom_point(aes(color = -qsec)) +
   scale_color_continuous(type = "viridis") +
   coord_flip() +
-  geom_text(aes(angle = angle), size = 2, hjust = -.1) +
+  geom_text(aes(angle = angle), size = 2, hjust = -.1, color = "white") +
   theme_minimal() +
-  labs(x = "displacement", y = "time to travel 1/4 mile")
+  labs(x = "displacement", y = "time to travel 1/4 mile") +
+  theme(
+    # backgrounds
+    plot.background = element_rect(fill = "#16213e", color = NA),
+    panel.background = element_rect(fill = "#16213e", color = NA),
+    legend.background = element_rect(fill = "#16213e", color = NA),
+    legend.key = element_rect(fill = "#ffffff", color = NA),
+    
+    # White text for all elements
+    text = element_text(color = "white"),
+    axis.title = element_text(color = "white", size = 12),
+    axis.text = element_text(color = "white", size = 10),
+    plot.title = element_text(color = "white", size = 16, hjust = 0.5),
+    legend.title = element_text(color = "white", size = 10),
+    legend.text = element_text(color = "white", size = 9),
+    
+    # White grid lines with transparency
+    panel.grid.major = element_line(color = "#717171", linewidth = 0.5),
+    panel.grid.minor = element_line(color = "#717171", linewidth = 0.3),
+    
+    # White axis lines
+    axis.line = element_line(color = "white", linewidth = 0.5),
+    axis.ticks = element_line(color = "white"),
+    
+    # Legend position
+    legend.position = "right"
+  )
 ```
 
 :::
