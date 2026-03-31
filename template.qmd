@@ -97,7 +97,7 @@ style="border:none; background: transparent; border-radius: 20px; overflow: hidd
 
 :::
 
-::: {#slidebehindslide1a .step .slide data-y="-1000" data-scale=".1" data-z="-1000"}
+::: {#slidebehindslide1a .step .slide .center-content data-y="-1000" data-scale=".1" data-z="-1000"}
 
 And slides with more R output - **behind** your slides.
 
