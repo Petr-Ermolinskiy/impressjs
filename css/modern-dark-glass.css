@@ -407,3 +407,11 @@ a:focus {
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
+
+/* ============================================ */
+/* Progress Bar */
+/* ============================================ */
+
+.progress-bar-fill {
+    background: linear-gradient(90deg, #8686ba, #7d7d97, #8383d5);
+}

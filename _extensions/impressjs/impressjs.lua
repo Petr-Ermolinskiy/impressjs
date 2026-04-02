@@ -5,7 +5,8 @@ function Pandoc(doc)
     scripts = {
       {path = "resources/js/impress.js", afterBody = true},
       {path = "resources/js/init.js", afterBody = true},
-      {path = "resources/js/fullscreen.js", afterBody = true}
+      {path = "resources/js/fullscreen.js", afterBody = true},
+      {path = "resources/js/progress_bar.js", afterBody = true}
     }
   })
 end

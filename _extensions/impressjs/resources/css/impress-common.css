@@ -153,3 +153,71 @@ body.impress-mouse-timeout {
 */
 
 
+/* PROGRESS BAR */
+
+/* Progress Bar Styles */
+.progress-bar-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 10000;
+    cursor: pointer;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: rgba(0, 0, 0, 0.2);
+    transition: width 0.3s ease;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+/* Optional: Add percentage label on hover */
+.progress-bar-container:hover .progress-bar-fill::after {
+    content: attr(data-progress);
+    position: absolute;
+    right: 0;
+    top: -25px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: monospace;
+}
+
+/* Optional: Click to navigate */
+.progress-bar-container {
+    cursor: pointer;
+}
+
+/* Animation for progress bar fill */
+.progress-bar-fill {
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar-fill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
